@@ -52,9 +52,35 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
     <section class="page2" id="page2">
       <h2>EMPLOYÉS</h2>
       <p>Registre des employés actuellement en fonction dans l'entreprise</p>
-      <div class="anat">
-        
-      </div>
+      <div class="bla">
+        <?php 
+        $recupCount = $bdd->prepare('SELECT COUNT(*) FROM employe');
+        $recupCount->execute();
+        $fetchC = $recupCount->fetch();
+        $_SESSION['nombremploye'] = $fetchC[0];
+
+        $recupEmp = $bdd->prepare('SELECT * FROM employe');
+        $recupEmp->execute();
+        $fetch = $recupEmp->fetchAll();?>
+          <?php
+            for($i=0; $i < $_SESSION['nombremploye']; $i++){ 
+              ?>
+              <div class="box">
+              <div class="infoP"><?php echo $fetch[$i]['prenom'];?></div>
+              <div class= "infoP"><?php echo $fetch[$i]['nom']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['age']; ?> ans</div>
+              <div class= "info"><?php echo $fetch[$i]['sexe']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['mail']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['telephone']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['numeroSecuriteSociale']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['contrat']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['anciennete']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['adressePostale']; ?></div>
+              <div class= "info"><?php echo $fetch[$i]['lieuNaissance']; ?></div>
+              </div></br>
+              <?php
+            }?>
+            </div>
     </section>
     <section class="page3" id="page3">
       <h2>POLES</h2>

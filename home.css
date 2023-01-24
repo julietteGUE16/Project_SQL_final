@@ -6,6 +6,47 @@
     /*ou "Prompt", j'ai importé 2 polices qui me plaisaient via google front*/
 }
 
+.bla {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    gap: 2px;
+}
+
+.box {
+    background-color: #88b29e3c;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 20px 20px 20px #d9d0cc;
+    width: 250px;
+    height: 300px;
+    cursor: pointer;
+    transition: 0.8s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.infoP {
+    text-transform: uppercase;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.info {
+    margin-top: 3px;
+}
+
+.box:hover {
+    box-shadow: none;
+    transition: 0.8s;
+}
+
+.info {
+    position: center;
+}
+
 .infoEntreprise {
     font-size: 40px;
 }
