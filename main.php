@@ -39,5 +39,14 @@ if ($allInvit->rowCount() > 0) {
                 <?php
                 }
 }?>
+
+
+<p class="flex"> <a href="../pages/addEmployee.php"> new employee ? </a> </p></br>
+</br>
+<p class="flex"> <a href="../pages/addPole.php"> new pole ? </a> </p></br>
+</br>
+<p class="flex"> <a href="../pages/addPoste.php"> new poste ? </a> </p></br>
+</br>
+<p class="flex"> <a href="../pages/addSecteur.php"> new secteur ? </a> </p></br>
 </body>
 </html>
