@@ -2,11 +2,10 @@
 
 $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;', 'root', '');  
 
-//todo : ajouter la possibilité de créer un employé et de choisir un poste (si pas créer il faut d'abord le créer ...
-//todo : donc redirection vers la page créer un poste puis vers créer employé
 
 
-session_start();
+
+
 
 if(isset($_POST['btn'])){  
     
@@ -16,41 +15,45 @@ if(isset($_POST['btn'])){
        AND !empty($_POST['numSecu'])AND !empty($_POST['numTel'])AND !empty($_POST['sexe'])
        AND !empty($_POST['contrat'] AND !empty($_POST['poste']))){   
 
-          //todo : message alerte : créer un autre employé ? oui non
-          //oui = redirection page addEmploye
-          //non = redirection page main 
+        
+              
 
-          echo "ok = " .$_POST['poste'].  "</br>";
-
-          //todo : get id poste
-       $SelectId = $bdd->prepare('SELECT idPoste, nomPoste FROM poste WHERE nomPoste =?');
-        $SelectId->execute(array($_POST['poste'])); 
-                    echo "-|||". $SelectId->rowCount();
-            if ($SelectId->rowCount() > 0) { 
-                    $SelectId = $SelectId->fetchAll(); 
-                    echo "". $SelectId[0]['idPoste'];
-                    echo "". $SelectId[0]['nomPoste'];
-
-            } 
-
-          $anciennete = "".$_POST['year']."-".$_POST['month']."-".$_POST['day'];
-
+        //info $_POST['poste'] coupe au niveau des espaces donc précéddement on à mis en tête du texte l'id donc $_POST['poste'] nous donne que l'id du poste
+        $idPoste =  $_POST['poste'];
+        $anciennete  = "".$_POST['year']."-".$_POST['month']."-".$_POST['day'];
+        //$anciennete = strtotime($string);
+        $adr = $_POST['adresse'];
+        $age = $_POST['age'];
+        $villeBorn = $_POST['villeBorn'];
+        $mail = $_POST['mail'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $secu = $_POST['numSecu'];
+        $tel = $_POST['numTel'];
+        $sexe = $_POST['sexe'];
+        $contrat = $_POST['contrat'];
 
 
-                //echo "". $_POST['adresse']."||".$_POST['age']."||".$anciennete."||".$_POST['villeBorn']."||".$_POST['mail']."||".$_POST['nom']."||".
-                //$_POST['prenom']."||".$_POST['numSecu']."||".$_POST['numTel']."||".$_POST['sexe']."||".$_POST['contrat'];
 
 
-         // $insertTask = $bdd->prepare('INSERT INTO employe(adressePostale,age,anciennete,idPoste,lieuNaissance,mail,nom,prenom,numeroSecuriteSociale,telephone,sexe,contrat) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)');
-          //$insertTask->execute(array($_POST['adresse'],$_POST['age'],$anciennete, $SelectId[0] ,$_POST['villeBorn'],$_POST['mail'],$_POST['nom'],
-          //$_POST['prenom'],$_POST['numSecu'],$_POST['numTel'],$_POST['sexe'],$_POST['contrat']));      
-          //header('Location:main.php');
+            // echo "".$idPoste." , ". $anciennete." , ". $adr." , ".$age." , ".$villeBorn ."</br> , ". 
+             //$mail ." , ". $nom ." , ".$prenom." , ".$secu." , ".$tel." , ".$sexe." , ".$contrat;
+
+          
+          $insertEmploye = $bdd->prepare('INSERT INTO `employe` (idPoste,prenom,nom,age,sexe,mail,telephone,numeroSecuriteSociale,contrat,anciennete,adressePostale,lieuNaissance) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)');
+          $resul = $insertEmploye->execute(array($idPoste,$prenom,$nom,$age,$sexe,$mail,$tel,1234567893,$contrat,$anciennete,$adr,$villeBorn));      
+          
+         
+          
+        
+
+          header('Location:main.php');
         
 
       } else {
        
         echo "<script>alert('veuillez compléter tous les champs !')</script>";
-        header('Location: main.php');
+       
       }
 
 }
@@ -101,8 +104,6 @@ if(isset($_POST['btn'])){
 <option value="CDI">CDI</option>
 <option value="Alternance">Alternance</option>
 <option value="Stage">Stage</option>
-<option value="option">option</option>
-<option value="option">option</option>
 </SELECT>
 <p style="color:red;">¤ poste disponible : </p>
 
@@ -128,38 +129,44 @@ if ($allidPost->rowCount() > 0) {
    //on stock dans un tableau les id
     for ($j = 0; $j < count($allidPost); $j++){
         array_push($myArrayIdPoste, $allidPost[$j]['idPoste']);
+     
     }
 
+}else {
+    echo "pas de poste disponible";
 }
 
-echo "taille : " . count($myArrayIdPoste). "------". "</br>";
+//echo "taille : " . count($myArrayIdPoste). "------". "</br>";
 
 
-//todo : faire un count
-$allPoste = $bdd->prepare('SELECT * , count(nomPoste) AS nb FROM poste GROUP BY nomPoste ORDER BY nomPoste');
+
+$allPoste = $bdd->prepare('SELECT * FROM poste ORDER BY nomPoste');
 $allPoste->execute(); 
 
 if ($allPoste->rowCount() > 0) { 
         $allPoste = $allPoste->fetchAll();           
 
-
+    
 for ($i = 0; $i < count($allPoste); $i++){
   
     $nomPoste = $allPoste[$i]['nomPoste'];
     $idPoste = $allPoste[$i]['idPoste'];
-    $countPoste = $allPoste[$i]['nb'];
+  
 
-
+ 
     //regle le problème de disparition de texte
     $final = $idPoste ." ". $nomPoste;
 
     if(in_array($idPoste, $myArrayIdPoste)){
-     
-        echo "<option value= $final  >  $nomPoste : $countPoste  </option>";
-    } else {
+       
+
+        echo "<option value= $final  >  $nomPoste  </option>";
+    } else {     
    
-        echo "<option value='' disabled selected> $nomPoste : 0 </option>";
+   
+        echo "<option value='' disabled selected> $nomPoste  </option>";
     }
+  
 }
     
         }
@@ -183,8 +190,8 @@ for ($i = 0; $i < count($allPoste); $i++){
 <p style="color:red;">¤ prénom : </p>
 <input type="text" name ="prenom" required placeholder="ex : jean" autocomplete="off">
 
-<p style="color:red;">¤ numéro de sécurité social (13 max): </p>
-<input type="text" name ="numSecu" required placeholder="ex : 1111111111111" autocomplete="off" maxlength="13" >
+<p style="color:red;">¤ numéro de sécurité social (10 max et pas de 0) : </p>
+<input type="numnber" name ="numSecu" required placeholder="ex : 1111111111" autocomplete="off" maxlength="10" >
 
 <p style="color:red;">¤ sexe: </p>
 <SELECT name="sexe" size="1">
@@ -194,8 +201,8 @@ for ($i = 0; $i < count($allPoste); $i++){
 <option value="autre">autre</option>
 </SELECT>
 
-<p style="color:red;">¤ numéro de téléphone portable : </p>
-<input type="text" name ="numTel" required placeholder="ex : 06 14 58 25 25" autocomplete="off"  >
+<p style="color:red;">¤ numéro de téléphone portable (sans espace) : </p>
+<input type="text" name ="numTel" required placeholder="ex : 06 14 58 25 25" autocomplete="off" maxlength="10" >
 
 </br>
 </br>
