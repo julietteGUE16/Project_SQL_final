@@ -14,8 +14,8 @@ if(isset($_POST['btn'])){
         $pole = $_POST['pole'];
         $secteur = $_POST['secteur'];
         $description = $_POST['description'];
-        $insertEmploye = $bdd->prepare('INSERT INTO `pole` (idSecteur,nomPole,`description`) VALUES(?,?,?)');
-        $resul = $insertEmploye->execute(array($secteur,$pole,$description));      
+        $insertPole = $bdd->prepare('INSERT INTO `pole` (idSecteur,nomPole,`description`) VALUES(?,?,?)');
+        $resul = $insertPole->execute(array($secteur,$pole,$description));      
         header('Location:main.php');
       
 
@@ -86,7 +86,7 @@ if ($allSecteur->rowCount() > 0) {
 
 </br>
 </br>
-<button type="submit" href="addEmployee.php" name="btn">Ajouter pole !</button>
+<button type="submit" href="addPole.php" name="btn">Ajouter pole !</button>
 
 
 </form>

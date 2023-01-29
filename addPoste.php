@@ -18,8 +18,8 @@ if(isset($_POST['btn'])){
         $salaire = $_POST['salaire'];
         $pole = $_POST['pole'];
         $heure = $_POST['heure'];
-        $insertEmploye = $bdd->prepare('INSERT INTO `poste` (idPole,nomPoste,salaire,heuresSemaine) VALUES(?,?,?,?)');
-        $resul = $insertEmploye->execute(array($pole,$poste,$salaire,$heure));      
+        $insertPoste = $bdd->prepare('INSERT INTO `poste` (idPole,nomPoste,salaire,heuresSemaine) VALUES(?,?,?,?)');
+        $resul = $insertPoste->execute(array($pole,$poste,$salaire,$heure));      
         header('Location:main.php');
       
 
@@ -96,7 +96,7 @@ if ($allPole->rowCount() > 0) {
 
 </br>
 </br>
-<button type="submit" href="addEmployee.php" name="btn">Ajouter poste !</button>
+<button type="submit" href="addPoste.php" name="btn">Ajouter poste !</button>
 
 
 </form>
