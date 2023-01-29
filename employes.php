@@ -19,7 +19,8 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
       </div>
       <div class="menu">
         <ul>
-          <li><a href="/project_sql_final/home.php">Home</a></li>
+          <li><a href="/project_sql_final/home.php">MENU</a></li>
+          <li><a href="/project_sql_final/addEmployee.php">AJOUTER UN EMPLOYÉ</a></li>
         </ul>
       </div>
     </div>

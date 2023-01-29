@@ -113,8 +113,98 @@ a {
     display: flex;
 }
 
+.mainAdd {
+    display: flex;
+    padding: 0 1%;
+}
+
+.mainAdd p {
+    font-size: 25px;
+}
+
+.gauche {
+    margin-right: 100px;
+    padding: 10px 10px;
+}
+
+select {
+    border: 0;
+    border-bottom: solid 1px #d58498;
+    font-size: large;
+    background-color: #88b29e;
+}
+
+select,
+input {
+    background-color: transparent;
+    padding: 10px 10px;
+}
+
+.mainAdd input {
+    font-size: 25px;
+    width: 350px;
+    height: 20px;
+    border: 0;
+    border-bottom: solid 1px #d58498;
+    padding: 10px 10px;
+    text-decoration: none;
+}
+
+.together {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+input:focus {
+    outline: none;
+}
+
 h2 {
     margin-top: 40px;
+}
+
+button {
+    background: #d58498;
+    color: #fff;
+    border: none;
+    position: relative;
+    height: 60px;
+    font-size: 1.6em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+}
+
+button:hover {
+    background: transparent;
+    color: #88b29e;
+}
+
+button:before,
+button:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: #d58498;
+    transition: 400ms ease all;
+}
+
+button:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+button:hover:before,
+button:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
 }
 
 .navbar {

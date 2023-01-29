@@ -84,12 +84,53 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
             </div>
     </section>
     <section class="page3" id="page3">
-      <h2>POLES</h2>
-      <p>blabla</p>
-      <br/>
+    <h2>POLES</h2>
+      <p>Registre des poles de l'entreprise</p>
+      <div class="bla">
+        <?php 
+        $recupCount = $bdd->prepare('SELECT COUNT(*) FROM pole');
+        $recupCount->execute();
+        $fetchC = $recupCount->fetch();
+        $_SESSION['nombrepole'] = $fetchC[0];
+
+        $recupEmp = $bdd->prepare('SELECT * FROM pole');
+        $recupEmp->execute();
+        $fetch = $recupEmp->fetchAll();?>
+          <?php
+            if($_SESSION['nombrepole'] > 5){$_SESSION['nombrepole'] = 5;}
+            for($i=0; $i < $_SESSION['nombrepole']; $i++){ 
+              ?>
+              <div class="box">
+              <div class="infoP"><?php echo $fetch[$i]['nomPole'];?></div>
+              <div class= "info"><?php echo $fetch[$i]['description']; ?></div>
+              </div></br>
+              <?php
+            }?><a href="/project_sql_final/poles.php"><div class="boxend">+</div></a>
+            </div>
     </section>
     <section class="page4" id= "page4">
-      <h2>SECTEURS</h2>
-      <p>Tcbejzb<br/>
+    <h2>SECTEURS</h2>
+      <p>Registre des secteurs de l'entreprise</p>
+      <div class="bla">
+        <?php 
+        $recupCount = $bdd->prepare('SELECT COUNT(*) FROM secteur');
+        $recupCount->execute();
+        $fetchC = $recupCount->fetch();
+        $_SESSION['nombresecteurs'] = $fetchC[0];
+
+        $recupEmp = $bdd->prepare('SELECT * FROM secteur');
+        $recupEmp->execute();
+        $fetch = $recupEmp->fetchAll();?>
+          <?php
+            if($_SESSION['nombresecteurs'] > 5){$_SESSION['nombresecteurs'] = 5;}
+            for($i=0; $i < $_SESSION['nombresecteurs']; $i++){ 
+              ?>
+              <div class="box">
+              <div class="infoP"><?php echo $fetch[$i]['ville'];?></div>
+              <div class= "info"><?php echo $fetch[$i]['activitePrincipale']; ?></div>
+              </div></br>
+              <?php
+            }?><a href="/project_sql_final/secteurs.php"><div class="boxend">+</div></a>
+            </div>
   </body>
 </html>
