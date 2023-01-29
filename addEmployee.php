@@ -41,7 +41,7 @@ if(isset($_POST['btn'])){
 
           
           $insertEmploye = $bdd->prepare('INSERT INTO `employe` (idPoste,prenom,nom,age,sexe,mail,telephone,numeroSecuriteSociale,contrat,anciennete,adressePostale,lieuNaissance) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)');
-          $resul = $insertEmploye->execute(array($idPoste,$prenom,$nom,$age,$sexe,$mail,$tel,1234567893,$contrat,$anciennete,$adr,$villeBorn));      
+          $resul = $insertEmploye->execute(array($idPoste,$prenom,$nom,$age,$sexe,$mail,$tel,$secu,$contrat,$anciennete,$adr,$villeBorn));      
           
          
           
@@ -190,9 +190,9 @@ for ($i = 0; $i < count($allPoste); $i++){
 <p style="color:red;">¤ prénom : </p>
 <input type="text" name ="prenom" required placeholder="ex : jean" autocomplete="off">
 
-<p style="color:red;">¤ numéro de sécurité social (10 max et pas de 0) : </p>
-<input type="numnber" name ="numSecu" required placeholder="ex : 1111111111" autocomplete="off" maxlength="10" >
-
+<p style="color:red;">¤ 9 premier numéro de sécurité social (9 max et pas de 0) : </p>
+<input type="text" name ="numSecu" required placeholder="ex : 111111111" autocomplete="off" maxlength="9" >
+//todo
 <p style="color:red;">¤ sexe: </p>
 <SELECT name="sexe" size="1">
 <option value="" disabled selected>choix :</option>
@@ -201,8 +201,8 @@ for ($i = 0; $i < count($allPoste); $i++){
 <option value="autre">autre</option>
 </SELECT>
 
-<p style="color:red;">¤ numéro de téléphone portable (sans espace) : </p>
-<input type="text" name ="numTel" required placeholder="ex : 06 14 58 25 25" autocomplete="off" maxlength="10" >
+<p style="color:red;">¤ numéro de téléphone portable (sans espace ni le 0) : </p>
+<input type="text" name ="numTel" required placeholder="ex : 06 14 58 25 25" autocomplete="off" maxlength="9" >
 
 </br>
 </br>

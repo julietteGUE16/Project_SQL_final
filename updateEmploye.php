@@ -19,18 +19,18 @@ if ($theEmploye->rowCount() > 0) {
 for ($i = 0; $i < count($theEmploye); $i++){
 
 
-    $_POST['poste']= $idPosteEmp =  $theEmploye[$i]['idPoste'];
-    $_POST['anciennete']= $anciennete  = $theEmploye[$i]['anciennete'];
-    $_POST['adresse']= $adr = $theEmploye[$i]['adressePostale'];
-    $_POST['age']= $age = $theEmploye[$i]['age'];
-    $_POST['villeBorn']=$villeBorn = $theEmploye[$i]['lieuNaissance'];
-    $_POST['mail']=$mail = $theEmploye[$i]['mail'];
-    $_POST['nom']= $nom = $theEmploye[$i]['nom'];
-    $_POST['prenom']=$prenom = $theEmploye[$i]['prenom'];
-    $_POST['numSecu']=$secu = $theEmploye[$i]['numeroSecuriteSociale'];
-    $_POST['numTel']=$tel = $theEmploye[$i]['telephone'];
-    $_POST['sexe']= $sexe = $theEmploye[$i]['sexe'];
-    $_POST['contrat']=$contrat = $theEmploye[$i]['contrat'];
+     $idPosteEmp =  $theEmploye[$i]['idPoste'];
+    $anciennete  = $theEmploye[$i]['anciennete'];
+    $adr = $theEmploye[$i]['adressePostale'];
+    $age = $theEmploye[$i]['age'];
+    $villeBorn = $theEmploye[$i]['lieuNaissance'];
+    $mail = $theEmploye[$i]['mail'];
+    $nom = $theEmploye[$i]['nom'];
+    $prenom = $theEmploye[$i]['prenom'];
+    $secu = $theEmploye[$i]['numeroSecuriteSociale'];
+    $tel = $theEmploye[$i]['telephone'];
+    $sexe = $theEmploye[$i]['sexe'];
+    $contrat = $theEmploye[$i]['contrat'];
 
 
 
@@ -47,13 +47,13 @@ if(isset($_POST['btn'])){
       if(!empty($_POST['adresse']) AND !empty($_POST['age'])AND !empty($_POST['anciennete']) AND !empty($_POST['villeBorn'])
        AND !empty($_POST['mail']) AND !empty($_POST['nom']) AND !empty($_POST['prenom']) 
        AND !empty($_POST['numSecu'])AND !empty($_POST['numTel'])AND !empty($_POST['sexe'])
-       AND !empty($_POST['contrat']) AND !empty($_POST['poste'])){   
+       AND !empty($_POST['contrat'])  AND !empty($_POST['poste'])){   
 
      
 
         //info $_POST['poste'] coupe au niveau des espaces donc précéddement on à mis en tête du texte l'id donc $_POST['poste'] nous donne que l'id du poste
         $idPoste2 =  $_POST['poste'];
-        $anciennete2  = "".$_POST['year']."-".$_POST['month']."-".$_POST['day'];
+        $anciennete2  = $_POST['anciennete'];
         //$anciennete = strtotime($string);
         $adr2 = $_POST['adresse'];
         $age2 = $_POST['age'];
@@ -66,31 +66,26 @@ if(isset($_POST['btn'])){
         $sexe2 = $_POST['sexe'];
         $contrat2 = $_POST['contrat'];
 
+    
+      
 
-            echo "test";
 
-            // echo "".$idPoste." , ". $anciennete." , ". $adr." , ".$age." , ".$villeBorn ."</br> , ". 
-             //$mail ." , ". $nom ." , ".$prenom." , ".$secu." , ".$tel." , ".$sexe." , ".$contrat;
-
+          $updateEmploye = $bdd->prepare("UPDATE employe SET nom ='$nom2', prenom ='$prenom2', idPoste='$idPoste2' , adressePostale='$adr2' , anciennete='$anciennete2' , 
+          age='$age2' , lieuNaissance='$villeBorn2' , mail='$mail2' , numeroSecuriteSociale='$secu2' , telephone='$tel2' , sexe='$sexe2' , contrat='$contrat2'  WHERE idEmploye = ?");
+          $resul = $updateEmploye->execute(array($var_idEmploye));      
           
-          $updateEmploye = $bdd->prepare('UPDATE `employe` SET idPoste =? AND prenom=?AND nom=? AND age=? AND sexe=?AND mail=? AND telephone=? AND numeroSecuriteSociale=? AND contrat=?  AND anciennete=?AND adressePostale=? AND lieuNaissance=? WHERE idEmploye = ?');
-          $resul = $updateEmploye->execute(array($idPoste2,$prenom2,$nom2,$age2,$sexe2,$mail2,$tel2,$secu2,$contrat2,$anciennete2,$adr2,$villeBorn2,$var_idEmploye));      
-          
-         
-          
-        
 
-          header('Location:main.php');
+         header('Location:main.php');
         
 
       } else {
        
        
-        echo "test : ".   !empty($_POST['mail']) ;//AND !empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['numSecu'])AND !empty($_POST['numTel'])AND !empty($_POST['sexe'])       AND !empty($_POST['contrat']) AND !empty($_POST['poste'])
        
        
        
-        // echo "<script>alert('veuillez compléter tous les champs !')</script>";
+       
+         echo "<script>alert('veuillez compléter tous les champs !')</script>";
        
       }
 
@@ -132,13 +127,16 @@ if(isset($_POST['btn'])){
 
 <input type="text" name ="anciennete" value ="<?php echo $anciennete ?>"  required placeholder="ex : 2023-02-15" autocomplete="off" size="6" maxLength="10"> </p>
 
+
+<p style="color:grey;">-- contrat actuel  : <?php echo $contrat ?></p>
 <p style="color:red;">¤ type de contrat : </p>
+
 
 <?php
 $liste = array("CDD", "CDI", "Alternance", "Stage", "pas de contrat" );?>
 
 <SELECT name="contrat" value="" size="1">
-<option value="<?php echo $contrat; ?>" selected="selected"><?php echo $contrat; ?></option>
+<option  value="<?php echo $contrat; ?>" selected="selected"><?php echo $contrat; ?></option>
 
 <?php 
 
@@ -170,11 +168,9 @@ if ($allPoste->rowCount() > 0) {
 <p style="color:red;">¤ poste disponible (le poste de l'employé compris) : </p>
 
 
-<SELECT name="poste"  size="1">
 
 
-
-
+<SELECT name="poste" value=""  size="1">
 
 <?php 
 
@@ -208,21 +204,9 @@ $allPoste = $bdd->prepare('SELECT * FROM poste ORDER BY nomPoste');
 $allPoste->execute(); 
 
 if ($allPoste->rowCount() > 0) { 
-        $allPoste = $allPoste->fetchAll();      
+        $allPoste = $allPoste->fetchAll();   
         
-        for ($i = 0; $i < count($allPoste); $i++){
-  
-            $nomPoste = $allPoste[$i]['nomPoste'];
-            $idPoste = $allPoste[$i]['idPoste'];
-
-            if($idPoste == $idPosteEmp){
-                ?><option value="<?php echo $final; ?>" selected="selected"><?php echo $nomPoste; ?></option><?php
-            
         
-            }
-
-        }
-
     
 for ($i = 0; $i < count($allPoste); $i++){
   
@@ -232,14 +216,14 @@ for ($i = 0; $i < count($allPoste); $i++){
 
  
     //regle le problème de disparition de texte
-    $final = $idPoste ." ". $nomPoste;
+   
     if($idPoste != $idPosteEmp){
 
     if(in_array($idPoste, $myArrayIdPoste)){
        
 
  
-        ?><option value="<?php echo $final; ?>" ><?php echo $nomPoste; ?></option><?php
+        ?><option value="<?php echo $idPoste; ?>" ><?php echo $nomPoste; ?></option><?php
     } else {     
    
    
@@ -248,6 +232,18 @@ for ($i = 0; $i < count($allPoste); $i++){
     }
 }
   
+}
+for ($i = 0; $i < count($allPoste); $i++){
+  
+    $nomPoste = $allPoste[$i]['nomPoste'];
+    $idPoste = $allPoste[$i]['idPoste'];
+
+    if($idPoste == $idPosteEmp){
+        ?><option selected value="<?php echo $idPoste; ?>" ><?php echo $nomPoste; ?></option><?php
+    
+
+    }
+
 }
     
         }
@@ -271,8 +267,8 @@ for ($i = 0; $i < count($allPoste); $i++){
 <p style="color:red;">¤ prénom : </p>
 <input type="text" name ="prenom" value ="<?php echo $prenom ?>" required placeholder="ex : jean" autocomplete="off">
 
-<p style="color:red;">¤ numéro de sécurité social (10 max et pas de 0) : </p>
-<input type="numnber" name ="numSecu" value ="<?php echo $secu ?>" required placeholder="ex : 1111111111" autocomplete="off" maxlength="10" >
+<p style="color:red;">¤ 9 premier numéro de sécurité social (9 max et pas de 0) : </p>
+<input type="texte" name ="numSecu" value ="<?php echo $secu ?>" required placeholder="ex : 1111111111" autocomplete="off" maxlength="9" >
 
 
 
@@ -299,7 +295,8 @@ for($i =0; $i<count($listeSexe);$i++){
 </SELECT>
 
 <p style="color:red;">¤ numéro de téléphone portable (sans espace) : </p>
-<input type="text" name ="numTel" value ="<?php echo $tel ?>" required placeholder="ex : 06 14 58 25 25" autocomplete="off" maxlength="10" >
+<p >0
+<input type="text" name ="numTel" value ="<?php echo $tel ?>" required placeholder="ex : 06 14 58 25 25" autocomplete="off" maxlength="9" ></p>
 
 </br>
 </br>
