@@ -192,7 +192,7 @@ for ($i = 0; $i < count($allPoste); $i++){
 
 <p style="color:red;">¤ 9 premier numéro de sécurité social (9 max et pas de 0) : </p>
 <input type="text" name ="numSecu" required placeholder="ex : 111111111" autocomplete="off" maxlength="9" >
-//todo
+
 <p style="color:red;">¤ sexe: </p>
 <SELECT name="sexe" size="1">
 <option value="" disabled selected>choix :</option>
