@@ -30,11 +30,29 @@ $listid = array();
 if ($allInvit->rowCount() > 0) { 
             $allInvit = $allInvit->fetchAll();           
             for($i =0; $i < count($allInvit); $i++){
+
+                $nom =  $allInvit[$i]['nom'];
+                $id = $allInvit[$i]['idEmploye'];
+
+
                 ?>
              </br>
                 <?php
-                echo "" . $allInvit[$i]['nom']."  " . $allInvit[$i]['prenom']."  " . $allInvit[$i]['sexe']."  " . $allInvit[$i]['age']."ans  " . $allInvit[$i]['telephone']."  " . $allInvit[$i]['contrat'];
+                echo "" . $allInvit[$i]['nom']."  " . $allInvit[$i]['prenom']."  " . $allInvit[$i]['sexe']."  " . $allInvit[$i]['age']."ans  " . 
+                $allInvit[$i]['telephone']."  " . $allInvit[$i]['contrat'];?> 
+                
+                
+                    <form method="get" action="updateEmploye.php">
+                    
+                    <input type="hidden" name="idEmploye" value=" <?php echo "". $id ?>" >
+               
+                    <input type="submit" value ="edit employe">
+              
+                
+                    <?php
                 ?>
+                </br>
+                </form>
                 </form>
                 <?php
                 }
@@ -50,3 +68,6 @@ if ($allInvit->rowCount() > 0) {
 <p class="flex"> <a href="addSecteur.php"> new secteur ? </a> </p></br>
 </body>
 </html>
+
+
+//todo : delete employe , poste, pole, secteur 

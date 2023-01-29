@@ -13,7 +13,7 @@ if(isset($_POST['btn'])){
       AND !empty($_POST['month']) AND !empty($_POST['day']) AND !empty($_POST['villeBorn'])
        AND !empty($_POST['mail']) AND !empty($_POST['nom']) AND !empty($_POST['prenom']) 
        AND !empty($_POST['numSecu'])AND !empty($_POST['numTel'])AND !empty($_POST['sexe'])
-       AND !empty($_POST['contrat'] AND !empty($_POST['poste']))){   
+       AND !empty($_POST['contrat']) AND !empty($_POST['poste'])){   
 
         
               
