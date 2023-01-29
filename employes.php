@@ -19,40 +19,15 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
       </div>
       <div class="menu">
         <ul>
-          <li><a href="#main">Entreprise</a></li>
-          <li><a href="#page2">Employés</a></li>
-          <li><a href="#page3">Poles</a></li>
-          <li><a href="#page4">Secteurs</a></li>
+          <li><a href="/project_sql_final/home.php">Home</a></li>
         </ul>
       </div>
     </div>
-    <section class="main" id="main">
-      <section class="page1" id="page1">
-        <div class="intro">
-          <h1>Bienvenu dans la base de données<br/><span>BONNE ÉTOILE</span><br/>Menu</h1>
-          <p class="text">
-            Sur cette application, tu trouveras toutes les informations conçernant le personnel de l'entreprise !
-        </p>
-        <div class="infoEntreprise">
-            <div class="bold">Siège social : </div>
-            <?php
-            $recupSiege = $bdd->prepare('SELECT * FROM entreprise');
-            $recupSiege->execute();
-            $fetch = $recupSiege->fetchAll();
-            echo $fetch[0]['localisationSiegeSocial'];
-            ?>
-            <div class="bold">Le mail : </div><?php echo $fetch[0]['mailEntreprise']; ?>
-</div>
-        </div>
-        <div>
-            <img class = "photopendu" src="https://zupimages.net/up/23/04/2386.png" />
-        </div>
-      </section>
-    </section>
     <section class="page2" id="page2">
       <h2>EMPLOYÉS</h2>
       <p>Registre des employés actuellement en fonction dans l'entreprise</p>
-      <div class="bla">
+      <div class="ctr">
+      <div class="bla2">
         <?php 
         $recupCount = $bdd->prepare('SELECT COUNT(*) FROM employe');
         $recupCount->execute();
@@ -63,9 +38,9 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
         $recupEmp->execute();
         $fetch = $recupEmp->fetchAll();?>
           <?php
-            if($_SESSION['nombremploye'] > 5){$_SESSION['nombremploye'] = 5;}
             for($i=0; $i < $_SESSION['nombremploye']; $i++){ 
               ?>
+              <li>
               <div class="box">
               <div class="infoP"><?php echo $fetch[$i]['prenom'];?></div>
               <div class= "infoP"><?php echo $fetch[$i]['nom']; ?></div>
@@ -80,16 +55,10 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
               <div class= "info"><?php echo $fetch[$i]['lieuNaissance']; ?></div>
               </div></br>
               <?php
-            }?><a href="/project_sql_final/employes.php"><div class="boxend">+</div></a>
+            }?>
             </div>
+          </div>
+          </li>
     </section>
-    <section class="page3" id="page3">
-      <h2>POLES</h2>
-      <p>blabla</p>
-      <br/>
-    </section>
-    <section class="page4" id= "page4">
-      <h2>SECTEURS</h2>
-      <p>Tcbejzb<br/>
   </body>
 </html>
