@@ -6,6 +6,10 @@
     /*ou "Prompt", j'ai importé 2 polices qui me plaisaient via google front*/
 }
 
+.recherche {
+    margin-left: 30px;
+}
+
 .bla {
     margin-top: 10px;
     display: flex;

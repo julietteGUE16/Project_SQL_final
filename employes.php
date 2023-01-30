@@ -27,14 +27,14 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
         <ul>
           <li><a href="/project_sql_final/home.php">MENU</a></li>
           <li><a href="/project_sql_final/addEmployee.php">AJOUTER UN EMPLOYÉ</a></li>
-          <div>
+        </ul>
+      </div>
+      <div class="recherche">
             <form method="GET">
             <input type="search" name="s" placeholder="Rechercher un employé" />
             <input type="submit" name="valider" value="Rechercher" />
           </form>
         </div>
-        </ul>
-      </div>
     </div>
     <section class="page2" id="page2">
       <h2>EMPLOYÉS</h2>
@@ -55,7 +55,7 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
             while($user =$allemployes->fetchAll()){
               $fetch = $user;
             }
-            $nombremploye = $allemployes->rowCount() - 1;
+            $nombremploye = $allemployes->rowCount();
           }
             for($i=0; $i < $nombremploye; $i++){ 
               ?>
