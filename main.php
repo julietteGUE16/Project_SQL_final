@@ -47,6 +47,14 @@ if ($allInvit->rowCount() > 0) {
                     <input type="hidden" name="idEmploye" value=" <?php echo "". $id ?>" >
                
                     <input type="submit" value ="edit employe">
+
+            </form>
+
+                    <form method="get" action="deleteElement.php">
+                    
+                    <input type="hidden" name="idEmploye" value=" <?php echo "". $id ?>" >//todo : change values send
+               
+                    <input type="submit" value ="delete employe">
               
                 
                     <?php
