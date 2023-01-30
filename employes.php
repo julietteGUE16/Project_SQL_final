@@ -2,6 +2,12 @@
 
 session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','root', ''); //on créer notre objet PDO pour pouvoir exécuter nos requetes, host --> hebergeur
+$allemployes = $bdd->query('SELECT * FROM employe ORDER BY idEmploye DESC');
+if(isset($_GET['s']) AND !empty($_GET['s'])){
+  $recherche = htmlspecialchars($_GET['s']);
+  $allemployes = $bdd->query('SELECT * FROM employe WHERE prenom LIKE "%'.$recherche.'%" OR nom LIKE "%'.$recherche.'%" ORDER BY idEmploye DESC');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +27,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
         <ul>
           <li><a href="/project_sql_final/home.php">MENU</a></li>
           <li><a href="/project_sql_final/addEmployee.php">AJOUTER UN EMPLOYÉ</a></li>
+          <div>
+            <form method="GET">
+            <input type="search" name="s" placeholder="Rechercher un employé" />
+            <input type="submit" name="valider" value="Rechercher" />
+          </form>
+        </div>
         </ul>
       </div>
     </div>
@@ -33,13 +45,19 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
         $recupCount = $bdd->prepare('SELECT COUNT(*) FROM employe');
         $recupCount->execute();
         $fetchC = $recupCount->fetch();
-        $_SESSION['nombremploye'] = $fetchC[0];
+        $nombremploye = $fetchC[0];
 
         $recupEmp = $bdd->prepare('SELECT * FROM employe');
         $recupEmp->execute();
         $fetch = $recupEmp->fetchAll();?>
           <?php
-            for($i=0; $i < $_SESSION['nombremploye']; $i++){ 
+          if($allemployes->rowcount()>0){
+            while($user =$allemployes->fetchAll()){
+              $fetch = $user;
+            }
+            $nombremploye = $allemployes->rowCount() - 1;
+          }
+            for($i=0; $i < $nombremploye; $i++){ 
               ?>
               <li>
               <div class="box">
