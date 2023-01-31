@@ -39,7 +39,30 @@ if ($allInvit->rowCount() > 0) {
              </br>
                 <?php
                 echo "" . $allInvit[$i]['nom']."  " . $allInvit[$i]['prenom']."  " . $allInvit[$i]['sexe']."  " . $allInvit[$i]['age']."ans  " . 
-                $allInvit[$i]['telephone']."  " . $allInvit[$i]['contrat'];?> 
+                $allInvit[$i]['telephone']."  " . $allInvit[$i]['contrat']."</br>";
+                
+                
+                    
+                $getPoste = $bdd->prepare('SELECT * FROM poste WHERE idPoste = ?');
+                $getPoste->execute(array($allInvit[$i]['idPoste'])); 
+
+             
+                if ($getPoste->rowCount() > 0) { 
+                    $getPoste = $getPoste->fetchAll(); 
+                   
+                                    
+                            for($j =0; $j < count($getPoste); $j++){
+
+
+                               echo "" . $getPoste[$j]['nomPoste']."  " . $getPoste[$j]['heuresSemaine']."h  " . $getPoste[$j]['salaire']."€"; 
+                           }
+
+
+                        }
+                
+                
+                
+                ?> 
                 
           
                     <form method="get" action="updateEmploye.php">
@@ -106,6 +129,24 @@ if ($allInvit->rowCount() > 0) {
                     </form>
                 
                     <?php
+                     $getPole = $bdd->prepare('SELECT * FROM pole WHERE idPole = ?');
+                     $getPole->execute(array($allInvit[$i]['idPole'])); 
+     
+                  
+                     if ($getPole->rowCount() > 0) { 
+                         $getPole = $getPole->fetchAll(); 
+                        
+                                         
+                                 for($j =0; $j < count($getPole); $j++){
+     
+     
+                                    echo "" . $getPole[$j]['nomPole'];
+                                }
+     
+     
+                             }
+
+
                 ?>
                 </br>
                
@@ -155,6 +196,22 @@ if ($allInvit->rowCount() > 0) {
                     </form>
                 
                     <?php
+                     $getSecteur = $bdd->prepare('SELECT * FROM secteur WHERE idSecteur = ?');
+                     $getSecteur->execute(array($allInvit[$i]['idSecteur'])); 
+     
+                  
+                     if ($getSecteur->rowCount() > 0) { 
+                         $getSecteur = $getSecteur->fetchAll(); 
+                        
+                                         
+                                 for($j =0; $j < count($getSecteur); $j++){
+     
+     
+                                    echo "secteur : " . $getSecteur[$j]['activitePrincipale'];
+                                }
+     
+     
+                             }
                 ?>
                 </br>
                

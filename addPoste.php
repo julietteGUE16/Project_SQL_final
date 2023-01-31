@@ -13,12 +13,13 @@ if(isset($_POST['btn'])){
     if(!empty($_POST['poste']) AND !empty($_POST['salaire'])AND !empty($_POST['heure'])
     AND !empty($_POST['pole'])){          
 
-            
+          
         $poste = $_POST['poste'];
         $salaire = $_POST['salaire'];
         $pole = $_POST['pole'];
         $heure = $_POST['heure'];
-        $insertPoste = $bdd->prepare('INSERT INTO `poste` (idPole,nomPoste,salaire,heuresSemaine) VALUES(?,?,?,?)');
+
+        $insertPoste = $bdd->prepare("INSERT INTO poste (idPole,nomPoste,salaire,heuresSemaine) VALUES(?,?,?,?)");
         $resul = $insertPoste->execute(array($pole,$poste,$salaire,$heure));      
         header('Location:main.php');
       
