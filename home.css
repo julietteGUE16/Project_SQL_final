@@ -7,7 +7,32 @@
 }
 
 .recherche {
-    width: 50px;
+    height: 2px;
+    width: 300px;
+}
+
+.recherche input {
+    color: white;
+    border-color: white;
+    text-decoration: none;
+}
+
+.recherche ::placeholder {
+
+    /* Firefox, Chrome, Opera */
+    color: white;
+}
+
+.recherche :-ms-input-placeholder {
+
+    /* Internet Explorer 10-11 */
+    color: white;
+}
+
+.recherche ::-ms-input-placeholder {
+
+    /* Microsoft Edge */
+    color: white;
 }
 
 .bla {
@@ -22,6 +47,10 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
+}
+
+.bla2 a {
+    color: black;
 }
 
 li {
@@ -65,8 +94,8 @@ a {
     border-radius: 10px;
     box-sizing: border-box;
     box-shadow: 20px 20px 20px #d9d0cc;
-    width: 250px;
-    height: 300px;
+    width: 300px;
+    height: 400px;
     cursor: pointer;
     transition: 0.8s;
     display: flex;
@@ -76,10 +105,47 @@ a {
     margin-top: 40px;
 }
 
+.box input,
+.box input {
+    color: #fff;
+    font-weight: bold;
+    background-color: #d58498;
+    border: none;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px #9f9fa2;
+    transition: 0.5s;
+}
+
+.box input:hover,
+.box input:hover {
+    box-shadow: none;
+    transition: 0.5s;
+}
+
+.box input {
+    margin-top: 30px;
+}
+
+.box input {
+    cursor: pointer;
+    border-bottom: solid 1px #d58498;
+    padding: 10px 10px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
 .infoP {
     text-transform: uppercase;
     font-size: larger;
     font-weight: bolder;
+}
+
+.infoPD {
+    text-transform: uppercase;
+    font-size: larger;
+    font-weight: bolder;
+    color: rgb(247, 165, 32);
 }
 
 .info {
@@ -131,14 +197,14 @@ a {
     padding: 10px 10px;
 }
 
-select {
+.mainAdd select {
     border: 0;
     border-bottom: solid 1px #d58498;
     font-size: large;
     background-color: #88b29e;
 }
 
-select,
+.mainAdd select,
 input {
     background-color: transparent;
     padding: 10px 10px;
@@ -153,6 +219,41 @@ input {
     padding: 10px 10px;
     text-decoration: none;
 }
+
+
+.mainAdd2 {
+    display: flex;
+    padding: 0 3%;
+    flex-direction: column;
+}
+
+.mainAdd2 p {
+    font-size: 25px;
+}
+
+.mainAdd2 select {
+    border: 0;
+    border-bottom: solid 1px #d58498;
+    font-size: large;
+    background-color: #88b29e;
+}
+
+.mainAdd2 select,
+input {
+    background-color: transparent;
+    padding: 10px 10px;
+}
+
+.mainAdd2 input {
+    font-size: 25px;
+    width: 350px;
+    height: 20px;
+    border: 0;
+    border-bottom: solid 1px #d58498;
+    padding: 10px 10px;
+    text-decoration: none;
+}
+
 
 .together {
     display: flex;
@@ -340,18 +441,25 @@ h3 {
 
 .page2,
 .page4,
-.page3 {
+.page3,
+.page5 {
     border-radius: 5px;
-    padding: 10% 10%;
+    padding: 10% 5%;
 }
 
 .page3 {
     background: #00000014;
 }
 
+.page5 {
+    background: #f8b74e2b;
+}
+
+
 .page2 h2,
 .page4 h2,
-.page3 h2 {
+.page3 h2,
+.page5 h2 {
     margin-bottom: 25px;
     font-size: 30px;
     font-weight: bold;
@@ -361,7 +469,8 @@ h3 {
 
 .page2 p,
 .page4 p,
-.page3 p {
+.page3 p,
+.page5 p {
     text-align: center;
 }
 

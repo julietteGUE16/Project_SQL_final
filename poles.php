@@ -26,15 +26,15 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
       <div class="menu">
         <ul>
           <li><a href="/project_sql_final/home.php">MENU</a></li>
-          <li><a href="/project_sql_final/addPole.php">AJOUTER UN POLE</a></li>
-        </ul>
-      </div>
-      <div class="recherche">
+          <li><a href="/project_sql_final/addPole.php">+POLE</a></li>
+          <div class="recherche">
             <form method="GET">
             <input type="search" name="s" placeholder="Rechercher un pole" />
             <input type="submit" name="valider" value="Rechercher" />
           </form>
         </div>
+        </ul>
+      </div>
     </div>
     <section class="page2" id="page2">
       <h2>PÔLES</h2>
@@ -62,7 +62,20 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
               <li>
               <div class="box">
               <div class="infoP"><?php echo $fetch[$i]['nomPole'];?></div>
+              <div class= "infoPD"><?php
+              $getPoste = $bdd->prepare('SELECT * FROM secteur WHERE idSecteur = ?');
+              $getPoste->execute(array($fetch[$i]['idSecteur'])); 
+                  $getPoste = $getPoste->fetchAll(); 
+                             echo "" . $getPoste[0]['activitePrincipale']; 
+              ?></div>
               <div class= "info"><?php echo $fetch[$i]['description']; ?></div>
+              <div class="together">
+              <form method="get" action="deleteElement.php">
+              <input type="hidden" name="idPole" value=" <?php echo "". $fetch[$i]['idPole'] ?>" >
+              <input type="hidden" name="type_of_delete" value=" <?php echo "". 3 ?>" >
+              <input type="submit" value ="delete pole">  
+              </form>
+            </div>
               </div></br>
               <?php
             }?>

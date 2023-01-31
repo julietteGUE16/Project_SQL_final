@@ -26,15 +26,15 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
       <div class="menu">
         <ul>
           <li><a href="/project_sql_final/home.php">MENU</a></li>
-          <li><a href="/project_sql_final/addEmployee.php">AJOUTER UN EMPLOYÉ</a></li>
-        </ul>
-      </div>
-      <div class="recherche">
+          <li><a href="/project_sql_final/addEmployee.php">+EMPLOYÉ</a></li>
+          <div class="recherche">
             <form method="GET">
             <input type="search" name="s" placeholder="Rechercher un employé" />
             <input type="submit" name="valider" value="Rechercher" />
           </form>
         </div>
+        </ul>
+      </div>
     </div>
     <section class="page2" id="page2">
       <h2>EMPLOYÉS</h2>
@@ -63,6 +63,12 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
               <div class="box">
               <div class="infoP"><?php echo $fetch[$i]['prenom'];?></div>
               <div class= "infoP"><?php echo $fetch[$i]['nom']; ?></div>
+              <div class= "infoPD"><?php
+              $getPoste = $bdd->prepare('SELECT * FROM poste WHERE idPoste = ?');
+              $getPoste->execute(array($fetch[$i]['idPoste'])); 
+                  $getPoste = $getPoste->fetchAll(); 
+                             echo "" . $getPoste[0]['nomPoste']; 
+              ?></div>
               <div class= "info"><?php echo $fetch[$i]['age']; ?> ans</div>
               <div class= "info"><?php echo $fetch[$i]['sexe']; ?></div>
               <div class= "info"><?php echo $fetch[$i]['mail']; ?></div>
@@ -72,7 +78,19 @@ if(isset($_GET['s']) AND !empty($_GET['s'])){
               <div class= "info"><?php echo $fetch[$i]['anciennete']; ?></div>
               <div class= "info"><?php echo $fetch[$i]['adressePostale']; ?></div>
               <div class= "info"><?php echo $fetch[$i]['lieuNaissance']; ?></div>
-              </div></br>
+              <div class="together">
+              <form method="get" action="updateEmploye.php">
+              <input type="hidden" name="idEmploye" value=" <?php echo "". $fetch[$i]['idEmploye'] ?>" >
+              <input type="submit" value ="edit employe">
+            </form>
+              <form method="get" action="deleteElement.php">
+              <input type="hidden" name="idEmploye" value=" <?php echo "". $fetch[$i]['idEmploye'] ?>" >
+              <input type="hidden" name="type_of_delete" value=" <?php echo "". 1 ?>" >
+              <input type="submit" value ="delete employe">  
+              </form>
+            </div>
+              </div>
+            </br>
               <?php
             }?>
             </div>

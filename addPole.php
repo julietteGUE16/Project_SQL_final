@@ -35,24 +35,39 @@ if(isset($_POST['btn'])){
 
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Bonne étoile</title>
+    <link type="image/png" href="https://zupimages.net/up/22/10/4cuf.png" />
+    <link rel="stylesheet" href="home.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Encode+Sans:wght@100&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <div class="navbar">
+      <div class="icon">
+        <img class="logomed" src="https://zupimages.net/up/23/04/1zcu.png" />
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="/project_sql_final/home.php">MENU</a></li>
+          <li><a href="/project_sql_final/poles.php">POLES</a></li>
+        </ul>
+      </div>
+    </div>
+    <section class="page2" id="page2">
+    <div class="mainAdd2">
+      <h2>CRÉER UN POLE !</h2>
 <form method="POST" action="" align="center">
-
-
-<h2>créer un Pole </h2>
-
-
-
-<p class="flex"> <a href="main.php"> goBack ? </a> </p></br>
-
-<p style="color:red;">¤ nom pole : </p>
+<div class="together">
+<p>nom pole : </p>
 <input type="text" name ="pole" required placeholder="ex : pole informatique  " size = "25" autocomplete="off">
-<p style="color:red;">¤ description: </p>
-
+</div>
+<div class="together">
+<p>description: </p>
 <input type="text" name ="description" required placeholder="ex : gestion des bases de données..." autocomplete="off" size="40" maxLength="100"> 
-
-
-</br>
-<p style="color:red;">¤ secteur : </p>
+</div>
+<div class="together">
+<p>secteur : </p>
 <SELECT name="secteur" size="1">
 <option value="" disabled selected>choix :</option>
 
@@ -79,27 +94,12 @@ if ($allSecteur->rowCount() > 0) {
 
 </SELECT>
 
+</div>
 
-
-</br>
-</br>
-
-</br>
-</br>
 <button type="submit" href="addPole.php" name="btn">Ajouter pole !</button>
 
 
 </form>
-</html>
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+</div>
+</html>

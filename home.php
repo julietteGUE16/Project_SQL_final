@@ -21,8 +21,9 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
         <ul>
           <li><a href="#main">Entreprise</a></li>
           <li><a href="#page2">Employés</a></li>
-          <li><a href="#page3">Poles</a></li>
-          <li><a href="#page4">Secteurs</a></li>
+          <li><a href="#page3">Postes</a></li>
+          <li><a href="#page4">Poles</a></li>
+          <li><a href="#page5">Secteurs</a></li>
         </ul>
       </div>
     </div>
@@ -69,6 +70,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
               <div class="box">
               <div class="infoP"><?php echo $fetch[$i]['prenom'];?></div>
               <div class= "infoP"><?php echo $fetch[$i]['nom']; ?></div>
+              <div class= "infoPD"><?php
+              $getPoste = $bdd->prepare('SELECT * FROM poste WHERE idPoste = ?');
+              $getPoste->execute(array($fetch[$i]['idPoste'])); 
+                  $getPoste = $getPoste->fetchAll(); 
+                             echo "" . $getPoste[0]['nomPoste']; 
+              ?></div>
               <div class= "info"><?php echo $fetch[$i]['age']; ?> ans</div>
               <div class= "info"><?php echo $fetch[$i]['sexe']; ?></div>
               <div class= "info"><?php echo $fetch[$i]['mail']; ?></div>
@@ -78,12 +85,62 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
               <div class= "info"><?php echo $fetch[$i]['anciennete']; ?></div>
               <div class= "info"><?php echo $fetch[$i]['adressePostale']; ?></div>
               <div class= "info"><?php echo $fetch[$i]['lieuNaissance']; ?></div>
+              <div class="together">
+              <form method="get" action="updateEmploye.php">
+              <input type="hidden" name="idEmploye" value=" <?php echo "". $fetch[$i]['idEmploye'] ?>" >
+              <input type="submit" value ="edit employe">
+            </form>
+              <form method="get" action="deleteElement.php">
+              <input type="hidden" name="idEmploye" value=" <?php echo "". $fetch[$i]['idEmploye'] ?>" >
+              <input type="hidden" name="type_of_delete" value=" <?php echo "". 1 ?>" >
+              <input type="submit" value ="delete employe">  
+              </form>
+            </div>
               </div></br>
               <?php
             }?><a href="/project_sql_final/employes.php"><div class="boxend">+</div></a>
             </div>
     </section>
     <section class="page3" id="page3">
+      <h2>POSTES</h2>
+      <p>Registre des postes de l'entreprise</p>
+      <div class="bla">
+        <?php 
+        $recupCount = $bdd->prepare('SELECT COUNT(*) FROM poste');
+        $recupCount->execute();
+        $fetchC = $recupCount->fetch();
+        $_SESSION['nombremploye'] = $fetchC[0];
+
+        $recupEmp = $bdd->prepare('SELECT * FROM poste');
+        $recupEmp->execute();
+        $fetch = $recupEmp->fetchAll();?>
+          <?php
+            if($_SESSION['nombremploye'] > 5){$_SESSION['nombremploye'] = 5;}
+            for($i=0; $i < $_SESSION['nombremploye']; $i++){ 
+              ?>
+              <div class="box">
+              <div class="infoP"><?php echo $fetch[$i]['nomPoste'];?></div>
+              <div class= "infoP"><?php echo $fetch[$i]['salaire']; ?> euros </div>
+              <div class= "infoPD"><?php
+              $getPoste = $bdd->prepare('SELECT * FROM pole WHERE idPole = ?');
+              $getPoste->execute(array($fetch[$i]['idPole'])); 
+                  $getPoste = $getPoste->fetchAll(); 
+                             echo "" . $getPoste[0]['nomPole']; 
+              ?></div>
+              <div class= "info"><?php echo $fetch[$i]['heuresSemaine']; ?> heures</div>
+              <div class="together">
+              <form method="get" action="deleteElement.php">
+              <input type="hidden" name="idPoste" value=" <?php echo "". $fetch[$i]['idPoste'] ?>" >
+              <input type="hidden" name="type_of_delete" value=" <?php echo "". 2 ?>" >
+              <input type="submit" value ="delete poste">  
+              </form>
+            </div>
+              </div></br>
+              <?php
+            }?><a href="/project_sql_final/postes.php"><div class="boxend">+</div></a>
+            </div>
+    </section>
+    <section class="page4" id="page4">
     <h2>POLES</h2>
       <p>Registre des poles de l'entreprise</p>
       <div class="bla">
@@ -102,13 +159,26 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
               ?>
               <div class="box">
               <div class="infoP"><?php echo $fetch[$i]['nomPole'];?></div>
+              <div class= "infoPD"><?php
+              $getPoste = $bdd->prepare('SELECT * FROM secteur WHERE idSecteur = ?');
+              $getPoste->execute(array($fetch[$i]['idSecteur'])); 
+                  $getPoste = $getPoste->fetchAll(); 
+                             echo "" . $getPoste[0]['activitePrincipale']; 
+              ?></div>
               <div class= "info"><?php echo $fetch[$i]['description']; ?></div>
+              <div class="together">
+              <form method="get" action="deleteElement.php">
+              <input type="hidden" name="idPole" value=" <?php echo "". $fetch[$i]['idPole'] ?>" >
+              <input type="hidden" name="type_of_delete" value=" <?php echo "". 3 ?>" >
+              <input type="submit" value ="delete pole">  
+              </form>
+            </div>
               </div></br>
               <?php
             }?><a href="/project_sql_final/poles.php"><div class="boxend">+</div></a>
             </div>
     </section>
-    <section class="page4" id= "page4">
+    <section class="page5" id= "page5">
     <h2>SECTEURS</h2>
       <p>Registre des secteurs de l'entreprise</p>
       <div class="bla">
@@ -128,6 +198,13 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
               <div class="box">
               <div class="infoP"><?php echo $fetch[$i]['ville'];?></div>
               <div class= "info"><?php echo $fetch[$i]['activitePrincipale']; ?></div>
+              <div class="together">
+              <form method="get" action="deleteElement.php">
+              <input type="hidden" name="idSecteur" value=" <?php echo "". $fetch[$i]['idSecteur'] ?>" >
+              <input type="hidden" name="type_of_delete" value=" <?php echo "". 4 ?>" >
+              <input type="submit" value ="delete secteur">  
+              </form>
+            </div>
               </div></br>
               <?php
             }?><a href="/project_sql_final/secteurs.php"><div class="boxend">+</div></a>

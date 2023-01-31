@@ -108,33 +108,45 @@ if(isset($_POST['btn'])){
 
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Bonne étoile</title>
+    <link type="image/png" href="https://zupimages.net/up/22/10/4cuf.png" />
+    <link rel="stylesheet" href="home.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Encode+Sans:wght@100&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <div class="navbar">
+      <div class="icon">
+        <img class="logomed" src="https://zupimages.net/up/23/04/1zcu.png" />
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="/project_sql_final/home.php">MENU</a></li>
+        </ul>
+      </div>
+    </div>
+    <section class="page2" id="page2">
+      <h2>ÉDITER UN EMPLOYÉ !</h2>
 <form method="POST" action="" align="center">
-
-
-<h2>éditer un employé </h2>
-
-
-
-<p class="flex"> <a href="main.php"> goBack ? </a> </p></br>
-
-<p style="color:red;">¤ adresse postale : </p>
+<div class="mainAdd">
+<div class="gauche">
+<div class="together">
+<p>adresse postale : </p>
 <input type="text" name ="adresse" value ="<?php echo "". $adr ?>" required placeholder="ex : 40 rue du général de gaulle 44000 nantes  " size = "40" autocomplete="off">
-<p style="color:red;">¤ âge de l'employé : </p>
-
+</div>
+<div class="together">
+<p>âge de l'employé : </p>
 <input type="text" name ="age" value ="<?php echo "". $age ?>" required placeholder="ex : 29" autocomplete="off" size="1" maxLength="3"> ans</input>
-</br>
-<p style="color:red;">¤ ancienneté : </p>
-
+</div>
+<div class="together">
+<p >¤ ancienneté : </p>
 <input type="text" name ="anciennete" value ="<?php echo $anciennete ?>"  required placeholder="ex : 2023-02-15" autocomplete="off" size="6" maxLength="10"> </p>
-
-
-<p style="color:grey;">-- contrat actuel  : <?php echo $contrat ?></p>
-<p style="color:red;">¤ type de contrat : </p>
-
-
+</div>
+<div class="together">
+<p>type de contrat : </p>
 <?php
 $liste = array("CDD", "CDI", "Alternance", "Stage", "pas de contrat" );?>
-
 <SELECT name="contrat" value="" size="1">
 <option  value="<?php echo $contrat; ?>" selected="selected"><?php echo $contrat; ?></option>
 
@@ -162,14 +174,9 @@ if ($allPoste->rowCount() > 0) {
 ?>
 
 </SELECT>
-
-
-<p style="color:grey;">-- poste actuel  : <?php echo $temp ?></p>
-<p style="color:red;">¤ poste disponible (le poste de l'employé compris) : </p>
-
-
-
-
+</div>
+<div class="together">
+<p>poste disponible (le poste de l'employé compris) : </p>
 <SELECT name="poste" value=""  size="1">
 
 <?php 
@@ -249,33 +256,38 @@ for ($i = 0; $i < count($allPoste); $i++){
         }
 ?>
 </SELECT>
-
-
-
+    </div>
 
 <p class="flex"> <a href="addPoste.php"> créer un poste ? (attention vous allez tout perdre) </a> 
 
-<p style="color:red;">¤ ville ou commune de naissance : </p>
+    </div>
+    <div>
+<div class="together">
+<p>ville ou commune de naissance : </p>
 <input type="text" name ="villeBorn" value ="<?php echo $villeBorn ?>" required placeholder="ex : saint-Herblain" autocomplete="off">
-
-<p style="color:red;">¤ mail : </p>
+    </div>
+<div class="together">
+<p>mail : </p>
 <input type="text" name ="mail" value ="<?php echo $mail ?>" required placeholder="ex : nom.prenom@gmail.com" autocomplete="off">
-
-<p style="color:red;">¤ nom : </p>
+    </div>
+<div class="together">
+<p>nom : </p>
 <input type="text" name ="nom" value ="<?php echo $nom ?>" required placeholder="ex : dupont" autocomplete="off">
-
-<p style="color:red;">¤ prénom : </p>
+</div>
+<div class="together">
+<p>prénom : </p>
 <input type="text" name ="prenom" value ="<?php echo $prenom ?>" required placeholder="ex : jean" autocomplete="off">
-
-<p style="color:red;">¤ 9 premier numéro de sécurité social (9 max et pas de 0) : </p>
+    </div>
+<div class="together">
+<p> 9 premiers numéros de sécurité sociale (9 max et pas de 0) : </p>
 <input type="texte" name ="numSecu" value ="<?php echo $secu ?>" required placeholder="ex : 1111111111" autocomplete="off" maxlength="9" >
 
 
 
-
 <?php $listeSexe = array("homme", "femme", "autre"); ?>
-
-<p style="color:red;">¤ sexe: </p>
+</div>
+<div class="together">
+<p>sexe: </p>
 <SELECT name="sexe" size="1">
 <option value="<?php echo $sexe; ?>" selected="selected"><?php echo $sexe; ?></option>
 
@@ -293,28 +305,16 @@ for($i =0; $i<count($listeSexe);$i++){
 
 
 </SELECT>
+</div>
 
-<p style="color:red;">¤ numéro de téléphone portable (sans espace) : </p>
+<div class="together">
+<p>numéro de téléphone portable (sans espace) : </p>
 <p >0
 <input type="text" name ="numTel" value ="<?php echo $tel ?>" required placeholder="ex : 06 14 58 25 25" autocomplete="off" maxlength="9" ></p>
-
-</br>
-</br>
-</br>
+</div>
 <button type="submit" href="addEmployee.php" name="btn">modifier l'employé !</button>
 
-
+</div>
 </form>
+</div>
 </html>
-
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
