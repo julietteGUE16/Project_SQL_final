@@ -17,7 +17,7 @@ if(isset($_POST['btn'])){
  
         $insertSecteur = $bdd->prepare('INSERT INTO `secteur` (ville,activitePrincipale) VALUES(?,?)');
         $resul = $insertSecteur->execute(array($ville,$activite));      
-        header('Location:main.php');
+        header('Location:home.php');
       
 
     } else {

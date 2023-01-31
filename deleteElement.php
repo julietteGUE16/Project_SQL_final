@@ -3,7 +3,6 @@
 $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;', 'root', '');  
 
 $type_of_delete = $_GET['type_of_delete'];
-echo $type_of_delete;
 
 if($type_of_delete == 1 ){
     $var_idEmploye = $_GET['idEmploye'];
@@ -43,8 +42,28 @@ echo "||||test idEmp = " . $var_idEmploye;*/
 
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Bonne étoile</title>
+    <link type="image/png" href="https://zupimages.net/up/22/10/4cuf.png" />
+    <link rel="stylesheet" href="home.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Encode+Sans:wght@100&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <div class="navbar">
+      <div class="icon">
+        <img class="logomed" src="https://zupimages.net/up/23/04/1zcu.png" />
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="/project_sql_final/home.php">MENU</a></li>
+        </ul>
+      </div>
+    </div>
+    <section class="page2" id="page2">
+    <div class="mainAdd2">
+      <h2>SUPPRIMER UN EMPLOYÉ !</h2>
 <form method="POST" action="" align="center">
-<p class="flex"> <a href="main.php"> goBack ? </a> </p>
 
 <h1>données supprimées :</h1>
 
@@ -502,7 +521,7 @@ if(isset($_POST['btn'])){
 
   }
    
-      header('Location:main.php');
+      header('Location:home.php');
 
       }
 
@@ -515,28 +534,8 @@ if(isset($_POST['btn'])){
 ?>
 
 
-
-
-
-
-</br>
-</br>
-</br>
-
 <button type="submit" href="addSecteur.php" name="btn">comfirmer !</button>
 
-
+    </div>
 </form>
 </html>
-
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>

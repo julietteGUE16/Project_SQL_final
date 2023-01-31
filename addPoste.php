@@ -16,7 +16,7 @@ if(isset($_POST['btn'])){
         $heure = $_POST['heure'];
         $insertPoste = $bdd->prepare('INSERT INTO `poste` (idPole,nomPoste,salaire,heuresSemaine) VALUES(?,?,?,?)');
         $resul = $insertPoste->execute(array($pole,$poste,$salaire,$heure));      
-        header('Location:main.php');
+        header('Location:home.php');
       
 
     } else {

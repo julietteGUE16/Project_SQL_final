@@ -66,7 +66,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;','ro
         
       
 
-        header('Location:main.php');
+        header('Location:home.php');
       
 
     } else {

@@ -75,7 +75,7 @@ if(isset($_POST['btn'])){
           $resul = $updateEmploye->execute(array($var_idEmploye));      
           
 
-         header('Location:main.php');
+         header('Location:home.php');
         
 
       } else {
@@ -127,8 +127,8 @@ if(isset($_POST['btn'])){
       </div>
     </div>
     <section class="page2" id="page2">
+    <form method="POST" action="" align="center">
       <h2>ÉDITER UN EMPLOYÉ !</h2>
-<form method="POST" action="" align="center">
 <div class="mainAdd">
 <div class="gauche">
 <div class="together">

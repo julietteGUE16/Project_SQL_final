@@ -16,7 +16,7 @@ if(isset($_POST['btn'])){
         $description = $_POST['description'];
         $insertPole = $bdd->prepare('INSERT INTO `pole` (idSecteur,nomPole,`description`) VALUES(?,?,?)');
         $resul = $insertPole->execute(array($secteur,$pole,$description));      
-        header('Location:main.php');
+        header('Location:home.php');
       
 
     } else {
