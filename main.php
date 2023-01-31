@@ -13,6 +13,9 @@ $bdd = new PDO('mysql:host=localhost;dbname=base_bonne_etoile;charset=utf8;', 'r
     <meta charset="utf-8">
 </head>
 <body>
+<h1>HOME PAGE </h1>
+</br>
+</br>
 <h2>Liste des employes  : </h2>
 
         
